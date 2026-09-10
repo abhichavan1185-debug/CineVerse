@@ -14,4 +14,4 @@ COPY backend/ .
 COPY --from=frontend-build /frontend/dist /app/frontend_dist
 ENV FRONTEND_DIST_DIR=/app/frontend_dist
 EXPOSE 8000
-CMD ["gunicorn", "config.wsgi:application", "--bind", "0.0.0.0:8000"]
+CMD ["sh", "-c", "python manage.py migrate && python manage.py seed_demo_data && gunicorn config.wsgi:application --bind 0.0.0.0:8000"]
