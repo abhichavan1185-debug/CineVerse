@@ -69,9 +69,12 @@ WSGI_APPLICATION = "config.wsgi.application"
 ASGI_APPLICATION = "config.asgi.application"
 
 # --- Database ---------------------------------------------------------------
-# Postgres in prod/dev; falls back to sqlite only if DATABASE_URL is unset,
-# purely so the project can be inspected without a running Postgres instance.
-if os.environ.get("POSTGRES_DB"):
+# Use PostgreSQL only when an external host is configured. Render's default
+# environment must fall back to the bundled SQLite database instead of trying
+# to connect to a nonexistent database on localhost.
+postgres_host = os.environ.get("POSTGRES_HOST", "").strip().lower()
+use_postgres = bool(os.environ.get("POSTGRES_DB")) and postgres_host not in {"", "localhost", "127.0.0.1"}
+if use_postgres:
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.postgresql",
