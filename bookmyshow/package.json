@@ -1,0 +1,10 @@
+{
+  "name": "showtime-app",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently -k -n backend,frontend -c blue,green \"cd backend && venv\\Scripts\\python.exe manage.py runserver 127.0.0.1:8000\" \"npm --prefix frontend run dev -- --host 127.0.0.1\""
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}

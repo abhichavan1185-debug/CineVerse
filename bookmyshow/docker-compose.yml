@@ -1,0 +1,42 @@
+version: "3.9"
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: bookmyshow
+      POSTGRES_USER: bookmyshow
+      POSTGRES_PASSWORD: bookmyshow
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports: ["5432:5432"]
+
+  redis:
+    image: redis:7-alpine
+    ports: ["6379:6379"]
+
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    env_file: ./backend/.env
+    depends_on: [db, redis]
+    ports: ["8000:8000"]
+    command: >
+      sh -c "python manage.py migrate &&
+             python manage.py seed_demo_data &&
+             gunicorn config.wsgi:application --bind 0.0.0.0:8000"
+
+  celery_worker:
+    build: ./backend
+    env_file: ./backend/.env
+    depends_on: [db, redis]
+    command: celery -A config worker -l info
+
+  celery_beat:
+    build: ./backend
+    env_file: ./backend/.env
+    depends_on: [db, redis]
+    command: celery -A config beat -l info
+
+volumes:
+  pgdata:

@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Outfit', system-ui, sans-serif;
+  }
+  body {
+    @apply bg-surface text-ink antialiased;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply px-6 h-11 rounded-pill bg-brand text-white font-semibold shadow-card
+           hover:bg-brand-600 active:bg-brand-700 disabled:opacity-40 disabled:cursor-not-allowed
+           transition-all duration-150 inline-flex items-center justify-center gap-2;
+  }
+  .btn-gold {
+    @apply px-6 h-11 rounded-pill bg-gradient-to-r from-gold to-gold-600 text-neutral-950 font-bold shadow-goldGlow
+           hover:brightness-105 active:scale-95 disabled:opacity-40 transition-all inline-flex items-center justify-center;
+  }
+  .btn-outline {
+    @apply px-5 h-11 rounded-pill border border-neutral-300 bg-white text-neutral-700 font-semibold
+           hover:border-brand hover:text-brand hover:bg-brand-50/30 transition-all inline-flex items-center justify-center gap-2;
+  }
+  .card {
+    @apply bg-white rounded-card shadow-card border border-neutral-100 transition-all;
+  }
+  .card-hover {
+    @apply hover:-translate-y-1 hover:shadow-xl transition-all duration-200;
+  }
+  .input {
+    @apply w-full h-11 px-4 rounded-xl border border-neutral-200 bg-white focus:outline-none
+           focus:ring-2 focus:ring-brand/30 focus:border-brand transition-all text-sm;
+  }
+}
+
+/* Screen Arc Graphic */
+.cinema-screen-glow {
+  height: 12px;
+  background: linear-gradient(180deg, rgba(229, 9, 20, 0.4) 0%, rgba(229, 9, 20, 0.05) 100%);
+  border-top: 3px solid #e50914;
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  box-shadow: 0 -4px 18px rgba(229, 9, 20, 0.35);
+}
+
+/* Printable Ticket Styling */
+@media print {
+  header, nav, footer, .no-print, button {
+    display: none !important;
+  }
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  .printable-ticket {
+    border: 2px dashed #000 !important;
+    box-shadow: none !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 20px !important;
+  }
+}

@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>CineVerse — Maharashtra's Premier Cinema Ticket Booking</title>
+
+    <!-- ── PWA / Installable App ── -->
+    <link rel="manifest" href="/static/manifest.json" />
+    <meta name="theme-color" content="#e11d48" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="application-name" content="CineVerse" />
+
+    <!-- ── Apple iOS PWA ── -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="CineVerse" />
+    <link rel="apple-touch-icon" href="/static/icon-192.png" />
+    <link rel="apple-touch-icon" sizes="192x192" href="/static/icon-192.png" />
+    <link rel="apple-touch-icon" sizes="512x512" href="/static/icon-512.png" />
+
+    <!-- ── Favicon ── -->
+    <link rel="icon" type="image/png" sizes="192x192" href="/static/icon-192.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/static/icon-512.png" />
+    <link rel="shortcut icon" href="/static/icon-192.png" />
+
+    <!-- ── SEO & Open Graph ── -->
+    <meta name="description" content="Book movie tickets online in Maharashtra. Select seats, order food, and get your QR e-ticket instantly. CineVerse — The smarter way to book cinema." />
+    <meta name="keywords" content="movie tickets, book cinema, Maharashtra, CineVerse, BookMyShow alternative, online ticket booking" />
+    <meta property="og:title" content="CineVerse — Maharashtra's Premier Cinema Ticket Booking" />
+    <meta property="og:description" content="Book movie tickets instantly. Select seats, order food, get QR e-ticket." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/static/icon-512.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- ── Microsoft / Windows PWA ── -->
+    <meta name="msapplication-TileImage" content="/static/icon-192.png" />
+    <meta name="msapplication-TileColor" content="#0f0f1a" />
+
+    <!-- ── Fonts ── -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-neutral-50 text-ink antialiased">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+    <!-- ── Service Worker Registration ── -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/static/sw.js', { scope: '/' })
+            .then(reg => console.log('[CineVerse PWA] Service Worker registered:', reg.scope))
+            .catch(err => console.warn('[CineVerse PWA] SW registration failed:', err));
+        });
+      }
+    </script>
+  </body>
+</html>
+
