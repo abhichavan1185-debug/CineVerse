@@ -143,6 +143,7 @@ SIMPLE_JWT = {
 CORS_ALLOWED_ORIGINS = os.environ.get(
     "CORS_ALLOWED_ORIGINS", "http://localhost:5173,http://localhost:3000"
 ).split(",")
+MOCK_GATEWAY_ENABLED = os.environ.get("MOCK_GATEWAY_ENABLED", "1") == "1"
 
 # --- Redis / Celery (seat-lock TTL backstop + async jobs) --------------------
 REDIS_URL = os.environ.get("REDIS_URL", "redis://localhost:6379/0")

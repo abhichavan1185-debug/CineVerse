@@ -57,7 +57,7 @@ class MockCheckoutView(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request):
-        if not settings.DEBUG:
+        if not settings.MOCK_GATEWAY_ENABLED:
             return Response({"error": "Not found."}, status=404)
         try:
             payment = Payment.objects.get(
