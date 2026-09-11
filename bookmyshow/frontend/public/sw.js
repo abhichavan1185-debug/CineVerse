@@ -1,13 +1,13 @@
-// CineVerse PWA Service Worker v1
+// CineVerse PWA Service Worker v2
 // Strategy: Network-first for APIs, Cache-first for static assets, Offline shell for navigation
 
-const CACHE_NAME = 'cineverse-pwa-v1';
-const STATIC_CACHE = 'cineverse-static-v1';
+const CACHE_NAME = 'cineverse-pwa-v2';
+const STATIC_CACHE = 'cineverse-static-v2';
 
 const APP_SHELL = [
   '/',
   '/movies',
-  '/static/manifest.json',
+  '/manifest.json',
 ];
 
 // ── Install: Pre-cache app shell ─────────────────────────────────────────────
@@ -104,8 +104,8 @@ self.addEventListener('push', (event) => {
   event.waitUntil(
     self.registration.showNotification(data.title || 'CineVerse', {
       body: data.body || 'Your booking update is ready!',
-      icon: '/static/icon-192.png',
-      badge: '/static/icon-192.png',
+      icon: '/icon-192.png',
+      badge: '/icon-192.png',
       tag: 'cineverse-notification',
       data: data.url || '/',
     })
